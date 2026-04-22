@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
 import Home from './pages/Home'
-import UserDashboard from './users/pages/userDashboard'
+import UserDashboard from './users/pages/UserDashboard'
 import Categories from './users/pages/Categories'
 import OrganizerDashboard from './organizer/pages/OrrganizerDashboard'
 import AdminDashboard from './admin/pages/AdminDashboard'
