@@ -24,12 +24,12 @@ const BookTicketModal = ({ event, token, onClose }) => {
             console.log('Event ID:', event._id)
             const res = await buyEventTicketAPI(event._id, { ticketsBooked: tickets }, reqHeader);
 
-            console.log("Backend response:", res.data);
+            // console.log("Backend response:", res.data);
 
-            if (!res.data || !res.data.url) {
-                alert("Payment session not created");
-                return;
-            }
+            // if (!res.data || !res.data.url) {
+            //     alert("Payment session not created");
+            //     return;
+            // }
 
             window.location.href = res.data.url;
 
