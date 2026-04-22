@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { QRCodeCanvas } from "qrcode.react";
-import { loadStripe } from "@stripe/stripe-js";
+// import { loadStripe } from "@stripe/stripe-js";
 import { buyEventTicketAPI } from "../../services/allAPIs";
 
 const BookTicketModal = ({ event, token, onClose }) => {
@@ -13,7 +13,7 @@ const BookTicketModal = ({ event, token, onClose }) => {
     const totalPrice = event.price * tickets;
 
     const handleBuyTicket = async (event) => {
-        const stripe = await loadStripe('pk_test_51SplwxHIQ8EC8cq4BYntBlipm6z5gasNtBdrDNqaUqiQI0zJWCSMAWGMRDhLWcBKijaYC2nyOYq0oDzKk3xQQAFu00mLBEsewl');
+        // const stripe = await loadStripe('pk_test_51SplwxHIQ8EC8cq4BYntBlipm6z5gasNtBdrDNqaUqiQI0zJWCSMAWGMRDhLWcBKijaYC2nyOYq0oDzKk3xQQAFu00mLBEsewl');
         try {
             const token = sessionStorage.getItem("token");
 
@@ -24,11 +24,12 @@ const BookTicketModal = ({ event, token, onClose }) => {
             console.log('Event ID:', event._id)
             const res = await buyEventTicketAPI(event._id, { ticketsBooked: tickets }, reqHeader);
 
-            // console.log('Stripe response:', res.data)
-            // if (!res.data.sessionId) {
-            //     alert("Session ID not received");
-            //     return;
-            // }
+            console.log("Backend response:", res.data);
+
+            if (!res.data || !res.data.url) {
+                alert("Payment session not created");
+                return;
+            }
 
             window.location.href = res.data.url;
 
